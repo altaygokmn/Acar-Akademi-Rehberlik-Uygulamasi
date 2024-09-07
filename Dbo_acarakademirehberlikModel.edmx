@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Dbo_acarakademirehberlikModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="book_id" />
+          </Key>
+          <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="examArea" Type="varchar" MaxLength="100" />
+          <Property Name="bookType" Type="varchar" MaxLength="20" />
+          <Property Name="author" Type="varchar" MaxLength="30" />
+          <Property Name="bookClass" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="meeting_id" />
+          </Key>
+          <Property Name="meeting_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="teacher_id" Type="int" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="meetingType" Type="varchar" MaxLength="20" />
+          <Property Name="performerName" Type="varchar" MaxLength="100" />
+          <Property Name="meeting_date" Type="datetime" />
+          <Property Name="meetingSubject" Type="varchar" MaxLength="200" />
+          <Property Name="meetingExplanation" Type="text" />
+          <Property Name="meetingPlanning" Type="text" />
+          <Property Name="meetingNotes" Type="text" />
+        </EntityType>
+        <EntityType Name="Meeting_Book_Recommendation">
+          <Key>
+            <PropertyRef Name="meeting_id" />
+            <PropertyRef Name="book_id" />
+          </Key>
+          <Property Name="meeting_id" Type="int" Nullable="false" />
+          <Property Name="book_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="student_id" />
+          </Key>
+          <Property Name="student_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="25" />
+          <Property Name="class" Type="varchar" MaxLength="25" />
+          <Property Name="school" Type="varchar" MaxLength="50" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="10" />
+          <Property Name="yksScore" Type="float" />
+          <Property Name="tytScore" Type="float" />
+          <Property Name="aytScore" Type="float" />
+          <Property Name="msuScore" Type="float" />
+          <Property Name="purpose" Type="varchar" MaxLength="25" />
+          <Property Name="parent1Name" Type="varchar" MaxLength="25" />
+          <Property Name="parent1ParentalCloseness" Type="varchar" MaxLength="30" />
+          <Property Name="parent1PhoneNumber" Type="varchar" MaxLength="10" />
+          <Property Name="parent2Name" Type="varchar" MaxLength="25" />
+          <Property Name="parent2ParentalCloseness" Type="varchar" MaxLength="30" />
+          <Property Name="parent2PhoneNumber" Type="varchar" MaxLength="10" />
+          <Property Name="teacher_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="varchar" MaxLength="25" />
+          <Property Name="role" Type="int" />
+        </EntityType>
+        <Association Name="FK__Meeting__teacher__440B1D61">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="teacher_id" />
+            </Principal>
+            <Dependent Role="Meeting">
+              <PropertyRef Name="teacher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_B__book___48CFD27E">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="Meeting_Book_Recommendation" Type="Self.Meeting_Book_Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="book_id" />
+            </Principal>
+            <Dependent Role="Meeting_Book_Recommendation">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meeting_B__meeti__47DBAE45">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="1" />
+          <End Role="Meeting_Book_Recommendation" Type="Self.Meeting_Book_Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="meeting_id" />
+            </Principal>
+            <Dependent Role="Meeting_Book_Recommendation">
+              <PropertyRef Name="meeting_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__teache__4CA06362">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="teacher_id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="teacher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMeeting">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="student_id" />
+            </Principal>
+            <Dependent Role="Meeting">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Dbo_acarakademirehberlikModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meeting_Book_Recommendation" EntityType="Self.Meeting_Book_Recommendation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Meeting__teacher__440B1D61" Association="Self.FK__Meeting__teacher__440B1D61">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Meeting" EntitySet="Meeting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_B__book___48CFD27E" Association="Self.FK__Meeting_B__book___48CFD27E">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Meeting_Book_Recommendation" EntitySet="Meeting_Book_Recommendation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meeting_B__meeti__47DBAE45" Association="Self.FK__Meeting_B__meeti__47DBAE45">
+            <End Role="Meeting" EntitySet="Meeting" />
+            <End Role="Meeting_Book_Recommendation" EntitySet="Meeting_Book_Recommendation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__teache__4CA06362" Association="Self.FK__Students__teache__4CA06362">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMeeting" Association="Self.FK_StudentMeeting">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Meeting" EntitySet="Meeting" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Dbo_acarakademirehberlikModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="book_id" />
+          </Key>
+          <Property Name="book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="examArea" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="bookType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="author" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="bookClass" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Meeting" Relationship="Self.Meeting_Book_Recommendation" FromRole="Book" ToRole="Meeting" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="meeting_id" />
+          </Key>
+          <Property Name="meeting_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teacher_id" Type="Int32" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="meetingType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="performerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="meeting_date" Type="DateTime" Precision="3" />
+          <Property Name="meetingSubject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="meetingExplanation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="meetingPlanning" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="meetingNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Meeting__teacher__440B1D61" FromRole="Meeting" ToRole="Teacher" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentMeeting" FromRole="Meeting" ToRole="Student" />
+          <NavigationProperty Name="Book" Relationship="Self.Meeting_Book_Recommendation" FromRole="Meeting" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="student_id" />
+          </Key>
+          <Property Name="student_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="class" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="school" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="yksScore" Type="Double" />
+          <Property Name="tytScore" Type="Double" />
+          <Property Name="aytScore" Type="Double" />
+          <Property Name="msuScore" Type="Double" />
+          <Property Name="purpose" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="parent1Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="parent1ParentalCloseness" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="parent1PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="parent2Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="parent2ParentalCloseness" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="parent2PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="teacher_id" Type="Int32" />
+          <NavigationProperty Name="Meeting" Relationship="Self.FK_StudentMeeting" FromRole="Student" ToRole="Meeting" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Students__teache__4CA06362" FromRole="Student" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Int32" />
+          <NavigationProperty Name="Meeting" Relationship="Self.FK__Meeting__teacher__440B1D61" FromRole="Teacher" ToRole="Meeting" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Students__teache__4CA06362" FromRole="Teacher" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Meeting__teacher__440B1D61">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="teacher_id" />
+            </Principal>
+            <Dependent Role="Meeting">
+              <PropertyRef Name="teacher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMeeting">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="student_id" />
+            </Principal>
+            <Dependent Role="Meeting">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__teache__4CA06362">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="teacher_id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="teacher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Meeting_Book_Recommendation">
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Dbo_acarakademirehberlikEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Book" EntityType="Self.Book" />
+          <EntitySet Name="Meeting" EntityType="Self.Meeting" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <AssociationSet Name="FK__Meeting__teacher__440B1D61" Association="Self.FK__Meeting__teacher__440B1D61">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Meeting" EntitySet="Meeting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMeeting" Association="Self.FK_StudentMeeting">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Meeting" EntitySet="Meeting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__teache__4CA06362" Association="Self.FK__Students__teache__4CA06362">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="Meeting_Book_Recommendation" Association="Self.Meeting_Book_Recommendation">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Meeting" EntitySet="Meeting" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Dbo_acarakademirehberlikModelStoreContainer" CdmEntityContainer="Dbo_acarakademirehberlikEntities1">
+          <EntitySetMapping Name="Book">
+            <EntityTypeMapping TypeName="Dbo_acarakademirehberlikModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="bookName" ColumnName="bookName" />
+                <ScalarProperty Name="examArea" ColumnName="examArea" />
+                <ScalarProperty Name="bookType" ColumnName="bookType" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="bookClass" ColumnName="bookClass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meeting">
+            <EntityTypeMapping TypeName="Dbo_acarakademirehberlikModel.Meeting">
+              <MappingFragment StoreEntitySet="Meeting">
+                <ScalarProperty Name="meeting_id" ColumnName="meeting_id" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="meetingType" ColumnName="meetingType" />
+                <ScalarProperty Name="performerName" ColumnName="performerName" />
+                <ScalarProperty Name="meeting_date" ColumnName="meeting_date" />
+                <ScalarProperty Name="meetingSubject" ColumnName="meetingSubject" />
+                <ScalarProperty Name="meetingExplanation" ColumnName="meetingExplanation" />
+                <ScalarProperty Name="meetingPlanning" ColumnName="meetingPlanning" />
+                <ScalarProperty Name="meetingNotes" ColumnName="meetingNotes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="Dbo_acarakademirehberlikModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="school" ColumnName="school" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="yksScore" ColumnName="yksScore" />
+                <ScalarProperty Name="tytScore" ColumnName="tytScore" />
+                <ScalarProperty Name="aytScore" ColumnName="aytScore" />
+                <ScalarProperty Name="msuScore" ColumnName="msuScore" />
+                <ScalarProperty Name="purpose" ColumnName="purpose" />
+                <ScalarProperty Name="parent1Name" ColumnName="parent1Name" />
+                <ScalarProperty Name="parent1ParentalCloseness" ColumnName="parent1ParentalCloseness" />
+                <ScalarProperty Name="parent1PhoneNumber" ColumnName="parent1PhoneNumber" />
+                <ScalarProperty Name="parent2Name" ColumnName="parent2Name" />
+                <ScalarProperty Name="parent2ParentalCloseness" ColumnName="parent2ParentalCloseness" />
+                <ScalarProperty Name="parent2PhoneNumber" ColumnName="parent2PhoneNumber" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="Dbo_acarakademirehberlikModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Meeting_Book_Recommendation" TypeName="Dbo_acarakademirehberlikModel.Meeting_Book_Recommendation" StoreEntitySet="Meeting_Book_Recommendation">
+            <EndProperty Name="Book">
+              <ScalarProperty Name="book_id" ColumnName="book_id" />
+            </EndProperty>
+            <EndProperty Name="Meeting">
+              <ScalarProperty Name="meeting_id" ColumnName="meeting_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

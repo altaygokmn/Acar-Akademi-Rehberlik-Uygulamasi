@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="54cfc2f786704d48b489cf9884b7afcd" Name="Diagram1">
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel2.Attendance" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel2.Book" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel2.Meeting" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel2.Meeting_Book_Recommendation" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel2.Secretary" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel2.Student" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel2.Teacher" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel2.database_firewall_rules" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel2.FK__Attendanc__stude__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel2.FK__Meeting_B__book___6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel2.FK__Meeting__teacher__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel2.FK_StudentMeeting" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel2.FK__Meeting_B__stude__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel2.FK__Student__teacher__68487DD7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

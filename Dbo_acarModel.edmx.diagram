@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d064d4045eae4d02bd66b5be1841e246" Name="Diagram1">
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel.Book" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel.Meeting" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel.Meeting_Book_Recommendation" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel.Student" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_acarakademirehberlikModel.Teacher" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel.FK__Meeting_B__book___5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel.FK__Meeting__teacher__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel.FK_StudentMeeting" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel.FK__Meeting_B__stude__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_acarakademirehberlikModel.FK__Students__teache__4CA06362" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
